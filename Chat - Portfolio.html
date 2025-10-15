@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio Hybride – Développeur Web</title>
+    <meta
+      name="description"
+      content="Portfolio hybride pour recherche d'emploi et poursuite d'études – projets, compétences, parcours, contact."
+    />
+    <style>
+      :root {
+        --bg: #0f1221; /* fond principal */
+        --panel: #141833; /* panneaux/cards */
+        --muted: #8a94b0; /* texte secondaire */
+        --text: #e9ecf8; /* texte principal */
+        --brand: #6d8bff; /* accent */
+        --brand-2: #66e0c2; /* accent secondaire */
+        --ring: rgba(109, 139, 255, 0.35);
+        --success: #47d18c;
+        --danger: #ff6b6b;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        --radius: 18px;
+        --radius-sm: 12px;
+        --radius-lg: 26px;
+        --space: clamp(16px, 2vw, 24px);
+        --w: min(1150px, 92vw);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(
+          180deg,
+          #0d1020 0%,
+          #0f1221 60%,
+          #0e1120 100%
+        );
+        color: var(--text);
+        font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+          Cantarell, "Helvetica Neue", Arial;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .container {
+        width: var(--w);
+        margin-inline: auto;
+      }
+
+      /* Header */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(15, 18, 33, 0.6);
+        backdrop-filter: saturate(140%) blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px var(--space);
+      }
+      .brand {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+      .brand .logo {
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        display: grid;
+        place-items: center;
+        box-shadow: 0 8px 20px var(--ring);
+      }
+      .brand .logo svg {
+        filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35));
+      }
+      .menu {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+      .menu a {
+        padding: 8px 12px;
+        border-radius: 10px;
+        color: var(--muted);
+      }
+      .menu a:hover {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .cta {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .btn {
+        padding: 10px 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--text);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+      }
+      .btn:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+      .btn.primary {
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        border: none;
+        box-shadow: 0 10px 22px var(--ring);
+      }
+      .btn.primary:hover {
+        filter: brightness(1.07);
+      }
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 4px;
+        cursor: pointer;
+      }
+      .hamburger span {
+        width: 24px;
+        height: 2px;
+        background: #c9d0ea;
+        border-radius: 2px;
+      }
+
+      /* Hero */
+      .hero {
+        padding: 64px 0 30px;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 30px;
+        align-items: center;
+      }
+      .pill {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.03);
+        color: #cbd3ef;
+        font-size: 12px;
+      }
+      .title {
+        font-size: clamp(28px, 3.8vw, 46px);
+        line-height: 1.1;
+        margin: 10px 0 14px;
+      }
+      .subtitle {
+        color: var(--muted);
+        max-width: 62ch;
+      }
+      .hero-cta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+      .statbar {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 26px;
+      }
+      .stat {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.05),
+          rgba(255, 255, 255, 0.02)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius);
+        padding: 16px;
+        text-align: center;
+      }
+      .stat b {
+        font-size: 22px;
+        display: block;
+      }
+      .card-hero {
+        background: radial-gradient(
+            90% 90% at 100% 0%,
+            rgba(102, 224, 194, 0.16),
+            transparent 50%
+          ),
+          radial-gradient(
+            80% 80% at 0% 100%,
+            rgba(109, 139, 255, 0.18),
+            transparent 50%
+          ),
+          var(--panel);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-lg);
+        padding: 22px;
+        box-shadow: var(--shadow);
+      }
+      .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .badge {
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 12px;
+        color: #d9e1ff;
+      }
+
+      /* Sections */
+      section {
+        padding: 42px 0;
+      }
+      .section-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+      .section-title {
+        font-size: 22px;
+      }
+      .muted {
+        color: var(--muted);
+      }
+
+      /* Compétences */
+      .skills {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      .skill {
+        background: var(--panel);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius);
+        padding: 16px;
+      }
+      .skill h4 {
+        margin: 0 0 10px;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .tag {
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 12px;
+      }
+
+      /* Projets */
+      .projects {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .thumb {
+        aspect-ratio: 16/9;
+        background: linear-gradient(
+          135deg,
+          rgba(109, 139, 255, 0.25),
+          rgba(102, 224, 194, 0.18)
+        );
+        display: grid;
+        place-items: center;
+      }
+      .thumb svg {
+        opacity: 0.9;
+      }
+      .card-body {
+        padding: 14px 14px 6px;
+      }
+      .techs {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin: 8px 0 10px;
+      }
+      .card-actions {
+        display: flex;
+        gap: 10px;
+        padding: 0 14px 14px;
+      }
+
+      /* Timeline */
+      .timeline {
+        position: relative;
+        margin: 10px 0 0;
+        padding-left: 26px;
+      }
+      .timeline:before {
+        content: "";
+        position: absolute;
+        left: 10px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(var(--brand), transparent);
+      }
+      .tl-item {
+        position: relative;
+        margin: 14px 0;
+        padding: 14px;
+        background: var(--panel);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius);
+      }
+      .tl-item:before {
+        content: "";
+        position: absolute;
+        left: -18px;
+        top: 16px;
+        width: 12px;
+        height: 12px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        box-shadow: 0 0 0 4px rgba(109, 139, 255, 0.15);
+      }
+
+      /* Contact */
+      form {
+        display: grid;
+        gap: 12px;
+      }
+      input,
+      textarea {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: var(--text);
+        padding: 12px 14px;
+        border-radius: 12px;
+        outline: none;
+      }
+      input:focus,
+      textarea:focus {
+        border-color: var(--brand);
+        box-shadow: 0 0 0 4px var(--ring);
+      }
+
+      /* Footer */
+      footer {
+        padding: 22px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--muted);
+      }
+
+      /* Utilities */
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .hidden {
+        display: none;
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(12px);
+        transition: all 0.6s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* Responsive */
+      @media (max-width: 980px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+        .skills {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .projects {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .cta {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+        .menu {
+          position: fixed;
+          inset: 56px 0 auto 0;
+          background: rgba(15, 18, 33, 0.92);
+          backdrop-filter: blur(12px);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+          padding: 12px var(--space);
+          display: none;
+        }
+        .menu.open {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+      }
+      @media (max-width: 640px) {
+        .skills {
+          grid-template-columns: 1fr;
+        }
+        .projects {
+          grid-template-columns: 1fr;
+        }
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header / Nav -->
+    <header>
+      <div class="container nav">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M4 12L11 5V10H20L13 19V14H4V12Z" fill="white" />
+            </svg>
+          </div>
+          <span>Ton Nom – Dev Web</span>
+        </div>
+
+        <nav class="menu" id="menu">
+          <a href="#accueil">Accueil</a>
+          <a href="#apropos">À propos</a>
+          <a href="#competences">Compétences</a>
+          <a href="#projets">Projets</a>
+          <a href="#parcours">Parcours</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="cta">
+          <a class="btn" href="#projets">Voir mes projets</a>
+          <a class="btn primary" href="#" download>CV (PDF)</a>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section id="accueil" class="hero container">
+        <div class="hero-grid">
+          <div>
+            <span class="pill">Portfolio hybride • Emploi & Études</span>
+            <h1 class="title">
+              Développeur Web Full Stack Junior<br />orienté
+              <span
+                style="
+                  background: linear-gradient(
+                    135deg,
+                    var(--brand),
+                    var(--brand-2)
+                  );
+                  -webkit-background-clip: text;
+                  background-clip: text;
+                  color: transparent;
+                "
+                >Angular</span
+              >
+              &
+              <span
+                style="
+                  background: linear-gradient(
+                    135deg,
+                    var(--brand-2),
+                    var(--brand)
+                  );
+                  -webkit-background-clip: text;
+                  background-clip: text;
+                  color: transparent;
+                "
+                >Symfony</span
+              >
+            </h1>
+            <p class="subtitle">
+              Je conçois des interfaces modernes, des APIs robustes et des
+              architectures propres (MVC). À la recherche d'un
+              <b>poste junior</b> et d'une <b>poursuite d'études</b> pour
+              approfondir mes compétences.
+            </p>
+            <div class="hero-cta">
+              <a class="btn primary" href="#projets">Explorer les projets</a>
+              <a class="btn" href="#contact">Me contacter</a>
+            </div>
+            <div class="statbar">
+              <div class="stat">
+                <b>15+ </b><span class="muted">projets réalisés</span>
+              </div>
+              <div class="stat">
+                <b>2 ans</b><span class="muted">d'expérience</span>
+              </div>
+              <div class="stat">
+                <b>Top</b><span class="muted">HTML • CSS • JS</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-hero">
+            <h3 style="margin: 0 0 8px">Compétences clés</h3>
+            <p class="muted" style="margin: 0">
+              Ce qui me distingue pour un employeur et une école :
+            </p>
+            <div class="badge-row">
+              <span class="badge">HTML5 sémantique</span>
+              <span class="badge">CSS Grid/Flex</span>
+              <span class="badge">JavaScript ES6+</span>
+              <span class="badge">Angular</span>
+              <span class="badge">Symfony (MVC)</span>
+              <span class="badge">API REST</span>
+              <span class="badge">MySQL/Doctrine</span>
+              <span class="badge">Sécurité (XSS/CSRF)</span>
+              <span class="badge">Git • CI/CD basique</span>
+              <span class="badge">Responsive • Accessibilité</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- À PROPOS -->
+      <section id="apropos" class="container reveal">
+        <div class="section-head">
+          <h2 class="section-title">À propos</h2>
+        </div>
+        <div class="grid-2">
+          <div>
+            <p>
+              Curieux et rigoureux, j'aime transformer des idées en applications
+              utiles. Mon objectif est double : intégrer une équipe pour
+              contribuer sur du <b>front-end Angular</b> et du
+              <b>back-end Symfony</b>, et poursuivre une formation supérieure
+              afin de renforcer mes bases théoriques (algo, architecture,
+              sécurité).
+            </p>
+            <p>
+              Je pratique quotidiennement Git, l'architecture MVC, et la
+              conception d'API REST. J'accorde une attention particulière à
+              l'<b>accessibilité</b>, aux <b>performances</b> et à la
+              <b>qualité du code</b>.
+            </p>
+          </div>
+          <div class="tl-aside" aria-hidden="true">
+            <div class="stat" style="text-align: left">
+              <b>Ce que je recherche</b>
+              <ul class="muted" style="margin: 8px 0 0 16px">
+                <li>Poste ou alternance en développement web</li>
+                <li>Poursuite d'études (Licence/École d'ingé)</li>
+                <li>Encadrement technique & code reviews</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPÉTENCES -->
+      <section id="competences" class="container reveal">
+        <div class="section-head">
+          <h2 class="section-title">Compétences</h2>
+          <p class="muted">Frontend • Backend • Outils • Méthodes</p>
+        </div>
+        <div class="skills">
+          <div class="skill">
+            <h4>Frontend</h4>
+            <div class="tags">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3 (Grid/Flex)</span>
+              <span class="tag">Sass</span>
+              <span class="tag">JavaScript (ES6+)</span>
+              <span class="tag">Angular</span>
+              <span class="tag">Bootstrap / Tailwind</span>
+              <span class="tag">Accessibilité</span>
+              <span class="tag">Responsive</span>
+            </div>
+          </div>
+          <div class="skill">
+            <h4>Backend</h4>
+            <div class="tags">
+              <span class="tag">PHP 8.x</span>
+              <span class="tag">Symfony (MVC)</span>
+              <span class="tag">API REST</span>
+              <span class="tag">Auth (bcrypt, JWT)</span>
+              <span class="tag">Validation</span>
+              <span class="tag">Sécurité (XSS/CSRF)</span>
+            </div>
+          </div>
+          <div class="skill">
+            <h4>Base de données</h4>
+            <div class="tags">
+              <span class="tag">MySQL</span>
+              <span class="tag">Doctrine ORM</span>
+              <span class="tag">Migrations</span>
+              <span class="tag">Requêtes optimisées</span>
+            </div>
+          </div>
+          <div class="skill">
+            <h4>Outils & Méthodes</h4>
+            <div class="tags">
+              <span class="tag">Git / GitHub</span>
+              <span class="tag">Node.js & npm</span>
+              <span class="tag">Composer</span>
+              <span class="tag">Postman</span>
+              <span class="tag">Tests (PHPUnit)</span>
+              <span class="tag">Agile (Scrum/Kanban)</span>
+              <span class="tag">CI/CD basique</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJETS -->
+      <section id="projets" class="container reveal">
+        <div class="section-head">
+          <h2 class="section-title">Projets sélectionnés</h2>
+          <p class="muted">3–6 projets concrets, orientés emploi & études</p>
+        </div>
+        <div class="projects">
+          <!-- Project 1 -->
+          <article class="card">
+            <div
+              class="thumb"
+              role="img"
+              aria-label="Capture projet Angular + API"
+            >
+              <svg
+                width="64"
+                height="64"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M3 5h18v10H3z" stroke="white" stroke-width="1.2" />
+                <path d="M3 17h18v2H3z" fill="white" opacity=".15" />
+                <path d="M6 8h6M6 11h10" stroke="white" stroke-width="1.2" />
+              </svg>
+            </div>
+            <div class="card-body">
+              <h3 style="margin: 0">App Angular + API REST</h3>
+              <p class="muted">
+                Gestion d'authentification (JWT), CRUD complet, services &
+                guards.
+              </p>
+              <div class="techs">
+                <span class="badge">Angular</span>
+                <span class="badge">TypeScript</span>
+                <span class="badge">API REST</span>
+              </div>
+            </div>
+            <div class="card-actions">
+              <a class="btn" href="#">Démo</a>
+              <a class="btn primary" href="#">Code</a>
+            </div>
+          </article>
+          <!-- Project 2 -->
+          <article class="card">
+            <div class="thumb" role="img" aria-label="Projet Symfony">
+              <svg
+                width="64"
+                height="64"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  x="3"
+                  y="4"
+                  width="18"
+                  height="14"
+                  rx="2"
+                  stroke="white"
+                  stroke-width="1.2"
+                />
+                <path
+                  d="M6 8h12M6 12h8M6 16h5"
+                  stroke="white"
+                  stroke-width="1.2"
+                />
+              </svg>
+            </div>
+            <div class="card-body">
+              <h3 style="margin: 0">Plateforme Symfony (MVC)</h3>
+              <p class="muted">
+                Gestion articles & rôles, Doctrine, formulaires sécurisés,
+                pagination.
+              </p>
+              <div class="techs">
+                <span class="badge">Symfony</span>
+                <span class="badge">Doctrine</span>
+                <span class="badge">MySQL</span>
+              </div>
+            </div>
+            <div class="card-actions">
+              <a class="btn" href="#">Démo</a>
+              <a class="btn primary" href="#">Code</a>
+            </div>
+          </article>
+          <!-- Project 3 -->
+          <article class="card">
+            <div class="thumb" role="img" aria-label="Site vitrine responsive">
+              <svg
+                width="64"
+                height="64"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M4 5h16v12H4z" stroke="white" stroke-width="1.2" />
+                <path
+                  d="M4 17h16v2H4zM7 8h4M7 11h8"
+                  stroke="white"
+                  stroke-width="1.2"
+                />
+              </svg>
+            </div>
+            <div class="card-body">
+              <h3 style="margin: 0">Site vitrine responsive</h3>
+              <p class="muted">
+                Design mobile-first, accessibilité, performance (Lighthouse
+                95+).
+              </p>
+              <div class="techs">
+                <span class="badge">HTML</span>
+                <span class="badge">CSS</span>
+                <span class="badge">JavaScript</span>
+              </div>
+            </div>
+            <div class="card-actions">
+              <a class="btn" href="#">Démo</a>
+              <a class="btn primary" href="#">Code</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- PARCOURS -->
+      <section id="parcours" class="container reveal">
+        <div class="section-head">
+          <h2 class="section-title">Parcours & expériences</h2>
+          <p class="muted">Timeline académique et professionnelle</p>
+        </div>
+        <div class="timeline">
+          <div class="tl-item">
+            <b>2024–2025 • Alternance / Stage – Dév Web</b>
+            <div class="muted">
+              Angular, Symfony, API REST, Git – contribution aux features,
+              revues de code.
+            </div>
+          </div>
+          <div class="tl-item">
+            <b>2023–2025 • Formation – Développement Web</b>
+            <div class="muted">
+              Projets scolaires : blog PHP/MySQL, app Angular, plateforme
+              Symfony (CRUD, auth).
+            </div>
+          </div>
+          <div class="tl-item">
+            <b>2023 • Autodidacte</b>
+            <div class="muted">
+              Cours en ligne, katas, contributions open-source, veille
+              technologique.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="container reveal">
+        <div class="section-head">
+          <h2 class="section-title">Contact</h2>
+          <p class="muted">Discutons de votre projet ou de mon admission ✉️</p>
+        </div>
+        <div class="grid-2">
+          <form id="contactForm">
+            <input type="text" name="name" placeholder="Votre nom" required />
+            <input
+              type="email"
+              name="email"
+              placeholder="Votre email"
+              required
+            />
+            <textarea
+              name="message"
+              rows="5"
+              placeholder="Votre message"
+              required
+            ></textarea>
+            <div style="display: flex; gap: 10px; align-items: center">
+              <button type="submit" class="btn primary">Envoyer</button>
+              <span id="formStatus" class="muted" aria-live="polite"></span>
+            </div>
+          </form>
+          <div>
+            <div class="stat">
+              <b>Disponibilités</b>
+              <div class="muted">
+                Entretien technique, alternance ou admission (réponse sous
+                24–48h).
+              </div>
+            </div>
+            <div style="height: 12px"></div>
+            <div class="stat">
+              <b>Liens</b>
+              <div
+                style="
+                  display: flex;
+                  gap: 10px;
+                  margin-top: 8px;
+                  flex-wrap: wrap;
+                "
+              >
+                <a class="btn" href="#">GitHub</a>
+                <a class="btn" href="#">LinkedIn</a>
+                <a class="btn" href="#" download>CV (PDF)</a>
+                <a class="btn" href="#projets">Projets</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        © <span id="year"></span> • Ton Nom – Développeur Web • Portfolio
+        hybride
+      </div>
+    </footer>
+
+    <script>
+      // --- Mobile menu toggle ---
+      const hamburger = document.getElementById("hamburger");
+      const menu = document.getElementById("menu");
+      hamburger?.addEventListener("click", () => menu.classList.toggle("open"));
+
+      // --- Smooth scroll for nav links ---
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener("click", (e) => {
+          const href = a.getAttribute("href");
+          if (!href || href === "#") return;
+          const el = document.querySelector(href);
+          if (el) {
+            e.preventDefault();
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+            menu?.classList.remove("open");
+          }
+        });
+      });
+
+      // --- Reveal on scroll ---
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+      // --- Contact form (demo only) ---
+      const form = document.getElementById("contactForm");
+      const status = document.getElementById("formStatus");
+      form?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        status.textContent = "Envoi…";
+        setTimeout(() => {
+          status.textContent = "Merci ! Votre message a bien été simulé.";
+          form.reset();
+        }, 600);
+      });
+
+      // --- Year ---
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

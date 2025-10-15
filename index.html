@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mon Portfolio</title>
+  <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+  <div class="balls-container-hero">
+  <!-- Header -->
+    <header class="hero" class="Gap">
+      
+      <h1>Bienvenue, je suis Jérémy</h1>
+      <p>Développeur web passionné qui aime transformer des idées en projets concrets 🚀</p> 
+      <a href="#about" class="btn">Découvrir</a> 
+      <div class="liste-keywords">
+        <ul class="keywords">
+          <li class="keyword-red">Front-End</li> 
+          <li class="keyword-purple">Back-End</li>
+          <li class="keyword-green">JavaSpring</li>
+          <li class="keyword-purple">Javascript</li>
+          <li class="keyword-purple">OPQuast</li>
+          <li class="keyword-green">Symfony</li>
+          <li class="keyword-red">Css</li>
+          <li class="keyword-red">HTML</li>
+          <li class="keyword-green">PIX</li>
+          <li class="keyword-red">Flutter</li>
+          <li class="keyword-purple">MYSQL</li>
+          <li class="keyword-green">Développeur WEB</li> 
+      </div> 
+    </header>
+  </div>
+
+  <!-- Qui suis-je -->
+  <section id="about" class="Gap">
+    <h2>Qui suis-je ?</h2>
+    <p>
+      Salut ! Je suis Jérémy, un passionné du web toujours en quête de nouveaux défis. Que ce soit avec Symfony, JavaScript ou Flutter, j'adore construire des trucs de A à Z — que ce soit une petite appli perso ou un site plus sérieux.
+      Quand je ne code pas, je fouine dans les perf, j'ajuste le responsive ou j'essaie de nouvelles librairies juste pour le fun. Bref, développeur le jour, bricoleur web la nuit.
+    </p>
+
+    <div class="timeline">
+      <div class="timeline-progress"></div>
+      
+      <div class="timeline-item" data-date="2023">
+        <div class="timeline-dot">
+          <span class="dot-year">2023</span>
+        </div>
+        <div class="timeline-content">
+          <h3>BUT Informatique</h3>
+          <p>IUT de Troyes - En cours</p>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-date="2021">
+        <div class="timeline-dot">
+          <span class="dot-year">2021</span>
+        </div>
+        <div class="timeline-content">
+          <h3>BTS SIO SLAM</h3>
+          <p>Saint-Joseph - Obtenu</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item" data-date="2019">
+        <div class="timeline-dot">
+          <span class="dot-year">2019</span>
+        </div>
+        <div class="timeline-content">
+          <h3>BAC STI2D</h3>
+          <p>Jules Garnier - Obtenu</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="balls-container-skills">
+  <!-- Quoi ? -->
+    <section id="skills" class="Gap">
+  <h2>Quoi ?</h2>
+  
+  <!-- Ajout des filtres -->
+  <div class="filter-container">
+    <button class="filter-btn active" data-filter="all">Tout voir</button>
+    <button class="filter-btn" data-filter="frontend">Front-End</button>
+    <button class="filter-btn" data-filter="backend">Back-End</button>
+    <button class="filter-btn" data-filter="database">Base de données</button>
+    <button class="filter-btn" data-filter="tools">Outils</button>
+  </div>
+
+  <div class="grid">
+    <!-- Frontend -->
+    <div class="card" data-category="frontend">
+      <h3>Frontend</h3>
+      <ul>
+        <li>React</li>
+        <li>Angular</li>
+        <li>Vue.js</li>
+        <li>HTML5/CSS3</li>
+        <li>JavaScript/TypeScript</li>
+      </ul>
+    </div>
+
+    <!-- Backend -->
+    <div class="card" data-category="backend">
+      <h3>Backend</h3>
+      <ul>
+        <li>PHP/Symfony</li>
+        <li>Node.js</li>
+        <li>Java Spring</li>
+        <li>API REST</li>
+      </ul>
+    </div>
+
+    <!-- Database -->
+    <div class="card" data-category="database">
+      <h3>Base de données</h3>
+      <ul>
+        <li>MySQL</li>
+        <li>PostgreSQL</li>
+        <li>MongoDB</li>
+        <li>Redis</li>
+      </ul>
+    </div>
+
+    <!-- Tools -->
+    <div class="card" data-category="tools">
+      <h3>Outils</h3>
+      <ul>
+        <li>Git/GitHub</li>
+        <li>Docker</li>
+        <li>VS Code</li>
+        <li>Postman</li>
+      </ul>
+    </div>
+  </div>
+</section>
+  </div>
+
+  <!-- Productions -->
+  <section id="productions" class="Gap">
+  <h2>Productions – Preuves</h2>
+  <div class="folder"> 
+    <div class="folder-content">
+      <div class="file-container">
+        <div class="file" data-project="angular">
+          <div class="file-header">
+            <h3>Application Angular</h3>
+            <span class="expand-btn">+</span>
+          </div>
+          <div class="file-preview">
+            <p>Application SPA moderne avec composants réutilisables</p>
+          </div>
+          <div class="file-content">
+            <p><strong>Demande :</strong> Créer une app SPA moderne</p>
+            <p><strong>Réflexion :</strong> Découpage en composants</p>
+            <p><strong>Contrainte :</strong> Respect du responsive</p>
+            <p><strong>Résultat :</strong> <a href="#">Voir le projet</a></p>
+          </div>
+        </div>
+
+        <div class="file" data-project="symfony">
+          <div class="file-header">
+            <h3>Site Symfony</h3>
+            <span class="expand-btn">+</span>
+          </div>
+          <div class="file-preview">
+            <p>Plateforme CRUD sécurisée avec architecture MVC</p>
+          </div>
+          <div class="file-content">
+            <p><strong>Demande :</strong> Développer une plateforme CRUD</p>
+            <p><strong>Réflexion :</strong> Organisation MVC</p>
+            <p><strong>Contrainte :</strong> Sécurité des données</p>
+            <p><strong>Résultat :</strong> <a href="#">Voir le projet</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Liens -->
+  <footer>
+    <h2>Retrouvez-moi</h2>
+    <p>
+      <a href="https://github.com/ton-compte" target="_blank">GitHub</a> |
+      <a href="https://linkedin.com/in/ton-compte" target="_blank">LinkedIn</a>
+    </p>
+  </footer>
+  <script src="script.js" defer></script>
+</body>
+</html>
