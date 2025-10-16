@@ -1,0 +1,104 @@
+{
+  "technologies": [
+    {
+      "name": "HTML5",
+      "category": "frontend",
+      "logo": "logo_html5.png"
+    },
+    {
+      "name": "CSS",
+      "category": "frontend", 
+      "logo": "logo_css.png"
+    },
+    {
+      "name": "JavaScript",
+      "category": "frontend",
+      "logo": "logo_js.png"
+    },
+    {
+      "name": "TypeScript",
+      "category": "frontend",
+      "logo": "logo_ts.png"
+    },
+    {
+      "name": "React",
+      "category": "frontend",
+      "logo": "logo_react.png"
+    },
+    {
+      "name": "Vue.js",
+      "category": "frontend",
+      "logo": "logo_vuejs.png"
+    },
+    {
+      "name": "Bootstrap",
+      "category": "frontend",
+      "logo": "logo_bootstrap.png"
+    },
+    {
+      "name": "jQuery",
+      "category": "frontend",
+      "logo": "logo_jquery.png"
+    },
+    {
+      "name": "Node.js",
+      "category": "backend",
+      "logo": "logo_nodejs.png"
+    },
+    {
+      "name": "PHP",
+      "category": "backend",
+      "logo": "logo_php.png"
+    },
+    {
+      "name": "Symfony",
+      "category": "backend",
+      "logo": "logo_symfony.webp"
+    },
+    {
+      "name": "REST",
+      "category": "backend",
+      "logo": "logo_rest.webp"
+    },
+    {
+      "name": "Docker",
+      "category": "tools",
+      "logo": "logo_docker.png"
+    },
+    {
+      "name": "Git",
+      "category": "tools",
+      "logo": "logo_git.png"
+    },
+    {
+      "name": "GitHub",
+      "category": "tools",
+      "logo": "logo_github.png"
+    },
+    {
+      "name": "Nginx",
+      "category": "tools",
+      "logo": "logo_nginx.png"
+    },
+    {
+      "name": "Ionic",
+      "category": "mobile",
+      "logo": "logo_ionic.webp"
+    },
+    {
+      "name": "Flutter",
+      "category": "mobile",
+      "logo": "logo_flutter.webp"
+    },
+    {
+      "name": "MySQL",
+      "category": "database",
+      "logo": "logo_mysql.png"
+    },
+    {
+      "name": "PostgreSQL",
+      "category": "database",
+      "logo": "logo_postgre.png"
+    }
+  ]
+}

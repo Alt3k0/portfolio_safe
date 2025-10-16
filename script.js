@@ -364,3 +364,87 @@ document.addEventListener('DOMContentLoaded', () => {
   // ...existing code...
   initProductions();
 });
+<<<<<<< HEAD
+
+async function initTechnologies() {
+  const response = await fetch('technologies.json');
+  const data = await response.json();
+  const grid = document.querySelector('.technologies-grid');
+  let technologies = data.technologies;
+  
+  // Tri initial par ordre alphabétique
+  technologies.sort((a, b) => a.name.localeCompare(b.name));
+  
+  // Fonction pour créer les éléments
+  function createTechElement(tech) {
+    const div = document.createElement('div');
+    div.className = 'tech-item';
+    div.setAttribute('data-category', tech.category);
+    div.innerHTML = `
+      <img src="public/images/${tech.logo}" alt="${tech.name}">
+      <span>${tech.name}</span>
+    `;
+    return div;
+  }
+
+  // Affichage initial
+  technologies.forEach(tech => {
+    grid.appendChild(createTechElement(tech));
+  });
+
+  // Gestion des filtres
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  let currentFilter = 'all';
+  
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+      if (filter === currentFilter) return;
+      
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      const items = grid.querySelectorAll('.tech-item');
+      
+      // Animation de sortie
+      items.forEach(item => {
+        item.classList.add('fade-out');
+      });
+
+      setTimeout(() => {
+        grid.innerHTML = '';
+        
+        if (filter === 'all') {
+          // Retour à l'ordre alphabétique original
+          technologies.sort((a, b) => a.name.localeCompare(b.name));
+        } else {
+          // Tri spécifique à la catégorie
+          technologies.sort((a, b) => {
+            if (a.category === filter && b.category !== filter) return -1;
+            if (a.category !== filter && b.category === filter) return 1;
+            return a.name.localeCompare(b.name);
+          });
+        }
+        
+        // Réaffichage avec animation
+        technologies.forEach((tech, index) => {
+          if (filter === 'all' || tech.category === filter) {
+            const element = createTechElement(tech);
+            element.style.animationDelay = `${index * 50}ms`;
+            element.classList.add('fade-in');
+            grid.appendChild(element);
+          }
+        });
+      }, 300);
+
+      currentFilter = filter;
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // ...existing code...
+  initTechnologies();
+});
+=======
+>>>>>>> 074d4b6614275e29510e4e3cb1c8f4754e686495
